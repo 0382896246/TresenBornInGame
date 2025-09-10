@@ -1,0 +1,556 @@
+<?xml version="1.0"?>
+<Data xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Questions>
+		<QuestionAsset>
+			<questionText>Vietcombank cảnh báo giao dịch bất thường tại Hà Nội mã VCB 48291 lúc 20 giờ 12. Để mở khóa ngay và tránh đóng băng tài khoản theo quy định chống rửa tiền, anh cung cấp mã OTP vừa gửi về máy cho chuyên viên bảo mật qua số 0833 9xx xxx trong 10 phút. Quá hạn hệ thống tự động khóa và hạn chế rút tiền.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>Ép thời gian</string>
+				<string>Đe dọa khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Alpha Global chúc mừng bạn trúng tuyển trợ lý văn phòng thu nhập 50 đến 60 triệu một tháng, không cần kinh nghiệm, vào làm trong tuần này. Để giữ chỗ phỏng vấn sáng mai, chuyển phí hồ sơ 500 nghìn vào tài khoản cá nhân Nguyen T tại ngân hàng X nội dung Hoso 7264. Xác nhận trước 20 giờ để không mất suất.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Lương cao bất thường</string>
+				<string>Không cần kinh nghiệm</string>
+				<string>Phí hồ sơ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Quỹ Vàng mở gói ưu tiên cho thành viên mới, cam kết lợi nhuận cố định 15 phần trăm mỗi tháng. Đăng ký tại bit.ly/goi-vang rồi nạp vốn khởi tạo vào tài khoản cá nhân Tran Q mã GOLD 118 để kích hoạt quyền truy cập bảng tín hiệu. Chốt danh sách lúc 21 giờ.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Cam kết lợi nhuận cố định</string>
+				<string>URL rút gọn</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Nhà mạng nâng cấp 5G miễn phí cho thuê bao của bạn. Đọc mã OTP và mã PIN sim để kích hoạt gói trong 10 phút, quá hạn hệ thống hủy nâng cấp.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>PIN</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Quỹ Cứu Trợ Miền Trung kêu gọi quyên góp khẩn cấp trong 6 giờ tới cho vùng lũ. Quét mã QR dưới đây để chuyển nhanh hoặc chuyển khoản trực tiếp vào tài khoản cá nhân của Thu quỹ ghi chú Ung ho MT 2025. Chúng tôi là đơn vị thuộc sở, cần xử lý ngay để kịp tiếp tế.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Ép thời gian</string>
+				<string>Quét QR nhận tiền</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Facebook</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Tổng đài ngân hàng thông báo thẻ của bạn đang bị treo do nghi ngờ rủi ro mã SEC 771. Để mở khóa ngay, cung cấp ba số CVV phía sau thẻ và mã PIN xác minh cho nhân viên. Nếu không hoàn tất trong hôm nay, hệ thống khóa thẻ tự động và áp dụng hạn mức chi tiêu dự phòng.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>CVV</string>
+				<string>PIN</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Cuộc gọi</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>GameStar mở suất thực tập cho dự án mới, không cần kinh nghiệm, hỗ trợ tuần đầu. Để nhận lịch làm việc, đóng phí xác minh 300 nghìn và cọc giữ chỗ 1 triệu, chuyển vào tài khoản cá nhân của HR mã GS Intern 558. Khoản cọc sẽ hoàn lại trong ngày nhận việc. Website nội bộ đang bảo trì, phản hồi qua email.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Không cần kinh nghiệm</string>
+				<string>Phí xác minh</string>
+				<string>Cọc giữ chỗ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>QShip thông báo kiện hàng của bạn đang kẹt cửa khẩu mã QS 64012. Trong 2 giờ tới cần nộp phí xác minh 120 nghìn qua mã QR để thông quan. Có thể thanh toán nhanh qua liên kết rút gọn bit.ly/confirm-ship. Quá hạn hệ thống tự hủy yêu cầu và thu phụ phí lưu kho.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí xác minh</string>
+				<string>Quét QR nhận tiền</string>
+				<string>URL rút gọn</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Bộ phận bảo mật phát hiện đăng nhập lạ vào tài khoản của bạn. Truy cập https://facebook-security-check.com/login để khôi phục, nhập mật khẩu hiện tại để xác thực và bật an toàn. Vui lòng hoàn tất trong 1 giờ để tránh hạn chế tính năng.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Link lạ</string>
+				<string>Domain giả</string>
+				<string>Mật khẩu</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Room VIP nhận thành viên mới, lợi nhuận cố định 10 phần trăm mỗi tuần. Tải ứng dụng riêng dạng apk đính kèm để giao dịch, đăng ký qua liên kết rút gọn và nạp vốn kích hoạt vào tài khoản cá nhân của quản lý quỹ mã ROOM 902. Sau khi xác nhận sẽ mở khóa nhóm tín hiệu.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Cam kết lợi nhuận cố định</string>
+				<string>Tệp lạ</string>
+				<string>URL rút gọn</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+			</reasons>
+			<category>Telegram</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Ngân hàng Nhà Nước gửi cảnh báo bảo mật cho tài khoản của bạn. Để xác thực quyền sở hữu, vui lòng đọc mã OTP cho chuyên viên ngay trong 5 phút, nếu chậm hệ thống áp dụng chế độ khóa tạm thời theo quy định. Liên hệ đường dẫn hỗ trợ nhanh bên dưới.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+				<string>Link lạ</string>
+			</reasons>
+			<category>WhatsApp</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Đại sứ quán thông báo lịch phỏng vấn học bổng đã sẵn sàng. Để hoàn tất hồ sơ, chuyển phí hồ sơ 650 nghìn và cọc giữ chỗ 2 triệu vào tài khoản cá nhân người phụ trách để xác nhận suất. Sau 21 giờ hệ thống tự động hủy.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí hồ sơ</string>
+				<string>Cọc giữ chỗ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Hệ thống thuế yêu cầu xác minh giao dịch bất thường. Bấm vào liên kết rút gọn bit.ly/tax-verify để hoàn tất trong 30 phút, nếu không tài khoản ngân hàng sẽ bị tạm khóa.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>URL rút gọn</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trung tâm từ thiện phát động chiến dịch cứu trợ đêm nay. Vui lòng quét mã QR để nhận tiền hoàn lại phí vận chuyển rồi chuyển tiếp cho hộ khó khăn. Mọi xác nhận đều qua đây, không gọi đường dây nóng vì đang quá tải.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Quét QR nhận tiền</string>
+				<string>Link lạ</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Facebook</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Bộ phận IT yêu cầu cập nhật bảo mật bắt buộc. Tải gói cập nhật SecurityUpdate.exe đính kèm và chạy ngay trước 18 giờ để giữ quyền truy cập. Mọi phản hồi gửi về địa chỉ sub.support-it.com.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Tệp lạ</string>
+				<string>Ép thời gian</string>
+				<string>Link lạ</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Cửa hàng điện máy thông báo hoàn tiền đơn hàng. Truy cập trang hỗ trợ shopcare-vn-refund.top để nhận trong ngày, nhập mật khẩu tài khoản mua hàng để đối chiếu.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Domain giả</string>
+				<string>Mật khẩu</string>
+				<string>Link lạ</string>
+			</reasons>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Cảnh sát kinh tế yêu cầu phối hợp điều tra. Truy cập police-vn-verify.site trong 15 phút để kê khai. Không thực hiện sẽ bị phong tỏa tài khoản.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Domain giả</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Câu lạc bộ Quỹ Vàng nội bộ mở “gói công nghệ” lợi nhuận cố định 12 phần trăm mỗi tuần. Đăng ký tại bit.ly/quy-vang-vip và chuyển vốn kích hoạt vào tài khoản cá nhân của Leader Q để mở quyền xem bảng tín hiệu. Chốt danh sách 20 giờ 30.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Cam kết lợi nhuận cố định</string>
+				<string>URL rút gọn</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Bộ phận hỗ trợ đơn hàng thông báo bạn được hoàn 300 nghìn vì đơn hàng giao trễ. Tải file RefundForm.html đính kèm, mở và nhập thông tin để nhận tiền. Địa chỉ gửi từ support@refund-shopee.co.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Tệp lạ</string>
+				<string>Domain giả</string>
+				<string>Link lạ</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Sở Lao Động thông báo đã duyệt hồ sơ chương trình thực tập quốc tế đợt tháng tới. Để hoàn tất, bạn chuyển phí hồ sơ 450 nghìn và cọc giữ chỗ 2 triệu vào tài khoản cá nhân của thư ký phụ trách trước 17 giờ hôm nay, chuyển xong phản hồi lại để chốt suất.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí hồ sơ</string>
+				<string>Cọc giữ chỗ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Kênh AirDrop Crypto mở gói ưu tiên, cam kết lợi nhuận cố định theo tuần cho thành viên mới. Đăng ký tại bit.ly/air-gold và nạp vốn kích hoạt vào tài khoản cá nhân của quản trị để nhận tín hiệu giao dịch trong ngày. Suất giới hạn, xác nhận trước 21 giờ.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Cam kết lợi nhuận cố định</string>
+				<string>URL rút gọn</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Telegram</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>MoPay cảnh báo tài khoản có dấu hiệu bất thường. Nhập OTP để bỏ chặn, nếu không hệ thống khóa toàn bộ tính năng chi tiêu trong hôm nay. Mọi thắc mắc liên hệ tổng đài tự động.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Shop xả kho iPhone 14 Pro Max bảo hành hãng, giá 6 triệu duy nhất trong 6 giờ. Đặt nhanh bằng cách quét mã QR dưới đây và chuyển cọc 300 nghìn, ghi chú Ten và So dien thoai để giữ máy. Hết thời gian sẽ trả suất cho người sau.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Quét QR nhận tiền</string>
+				<string>Cọc giữ chỗ</string>
+				<string>Ép thời gian</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+			</reasons>
+			<category>Facebook</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Cảnh sát hình sự đang điều tra đường dây rửa tiền, tài khoản của bạn nằm trong danh sách theo dõi. Truy cập police-verify-vn.com trong 15 phút để kê khai, đăng nhập bằng mật khẩu ngân hàng hiện tại và xác nhận để tránh phong tỏa tài khoản. Không hợp tác sẽ bị áp biện pháp khẩn cấp.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Domain giả</string>
+				<string>Mật khẩu</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Cuộc gọi</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>HR TechNova cần gấp cộng tác viên nhập liệu, không cần kinh nghiệm, thu nhập 35 đến 50 triệu mỗi tháng. Để xác nhận lịch onboarding, chuyển phí xác minh 299 nghìn vào tài khoản cá nhân của HR trong hôm nay, sau đó gửi biên lai để chốt ca làm.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Không cần kinh nghiệm</string>
+				<string>Lương cao bất thường</string>
+				<string>Phí xác minh</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Hỗ trợ đơn hàng Shopee thông báo hoàn tiền mã DH 90712 vì giao trễ. Tải file Refund-Gateway.html đính kèm, mở và điền thông tin thẻ để nhận trong ngày. Lưu ý xử lý sớm để không mất quyền lợi.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Tệp lạ</string>
+				<string>Link lạ</string>
+				<string>Domain giả</string>
+			</reasons>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trung tâm thẻ ngân hàng phát hiện giao dịch quốc tế bất thường. Để hủy ngay, vui lòng cung cấp ba số CVV ở mặt sau thẻ và mã PIN xác minh cho chuyên viên. Không xác nhận hôm nay thẻ sẽ bị khóa tạm thời.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>CVV</string>
+				<string>PIN</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Viber</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Cửa sổ Hỗ trợ Microsoft xuất hiện trên màn hình: máy của bạn có mã lỗi bảo mật 0x9A21. Tải và chạy SupportTool.exe từ support-microsoft-security.net rồi đăng nhập email bằng mật khẩu hiện tại để kỹ thuật viên xử lý trước 18 giờ.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Tệp lạ</string>
+				<string>Domain giả</string>
+				<string>Mật khẩu</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Website chat</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Tòa án Nhân dân TP thông báo tài khoản của bạn liên quan một vụ việc dân sự, cần xác minh ngay trên cổng court-verify-vn.com; hạn xử lý trước 17 giờ, nếu không sẽ đề nghị phong tỏa tài khoản phục vụ điều tra.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Link lạ</string>
+				<string>Domain giả</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>VNPAY cảnh báo bất thường, vui lòng đọc OTP cho chuyên viên trong 5 phút để bỏ chặn; quá thời gian hệ thống áp dụng khóa tạm thời theo quy định.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>Ép thời gian</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Ban quản lý chung cư thông báo còn 2 suất bãi xe tháng này, chuyển cọc giữ chỗ vào tài khoản cá nhân của thủ quỹ trước 21 giờ để khóa slot.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Cọc giữ chỗ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Thương hiệu X tuyển đại sứ làm online, không cần kinh nghiệm, lương 30–40 triệu. Chuyển phí xác minh 299 nghìn vào tài khoản cá nhân quản lý để nhận hợp đồng hôm nay.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Lương cao bất thường</string>
+				<string>Không cần kinh nghiệm</string>
+				<string>Phí xác minh</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+			</reasons>
+			<category>Instagram DM</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Hãng chuyển phát quốc tế báo kiện hàng kẹt hải quan, cần phí xác minh qua mã QR hoặc thanh toán nhanh tại bit.ly/customs-clear trong 2 giờ.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí xác minh</string>
+				<string>Quét QR nhận tiền</string>
+				<string>URL rút gọn</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>WhatsApp</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Nâng cấp thẻ ngân hàng hạng Platinum: đọc CVV và PIN để xác minh. Không xác nhận hôm nay thẻ bị khóa tạm thời theo chính sách an ninh.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>CVV</string>
+				<string>PIN</string>
+				<string>Đe doạ khóa tài khoản</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Viber</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trung tâm IELTS báo còn suất Speaking sớm, để giữ lịch yêu cầu nộp phí hồ sơ vào tài khoản cá nhân của điều phối trước 16 giờ, xác nhận qua email sau khi chuyển.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí hồ sơ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Bạn nhận Voucher 1.000.000; đăng nhập tại shop-shopee-secure.co và mở file VoucherClaim.html để kích hoạt trong ngày, quá thời hạn sẽ hủy.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Domain giả</string>
+				<string>Link lạ</string>
+				<string>Tệp lạ</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Shopee Chat</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Ngân hàng yêu cầu cập nhật eKYC: bấm mở trang secure-update.link và nhập OTP trong 5 phút để tránh hạn chế tính năng.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Yêu cầu OTP</string>
+				<string>Link lạ</string>
+				<string>Ép thời gian</string>
+				<string>Mạo danh ngân hàng &amp; cơ quan</string>
+			</reasons>
+			<category>App push</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Chương trình mua điện thoại trả góp 0% cho thành viên nhóm: nộp phí xác minh, chuyển cọc giữ chỗ vào tài khoản cá nhân admin trước 20 giờ để khóa đơn.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Phí xác minh</string>
+				<string>Cọc giữ chỗ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>Telegram</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Công ty dữ liệu tuyển QA từ xa, không cần kinh nghiệm, lương 40–60 triệu. Đăng ký nhanh bằng cách chuyển phí hồ sơ vào tài khoản cá nhân HR để chốt lịch test tối nay.</questionText>
+			<label>LuaDao</label>
+			<reasons>
+				<string>Lương cao bất thường</string>
+				<string>Không cần kinh nghiệm</string>
+				<string>Phí hồ sơ</string>
+				<string>Chuyển vào tài khoản cá nhân</string>
+				<string>Ép thời gian</string>
+			</reasons>
+			<category>LinkedIn</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>HR Công ty ABC mời phỏng vấn vị trí Thực tập sinh Lập trình, mức hỗ trợ 4–6 triệu/tháng. Lịch: 9 giờ ngày 25/08 tại Tầng 5, Tòa nhà XYZ, Quận 1. Vui lòng mang CV và CMND/CCCD. Không thu tiền trước, mọi trao đổi qua hr@abc.com.vn.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Vietcombank thông báo sao kê tháng 7 đã sẵn sàng. Quý khách vui lòng kiểm tra trong ứng dụng ngân hàng chính thức hoặc tại quầy, không cần cung cấp bất kỳ mã xác thực nào qua tin nhắn.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trang Fanpage có tích xanh của Hãng hàng không Việt thông báo mở check-in trực tuyến trước 24 giờ bay. Hành khách vào ứng dụng chính thức để làm thủ tục hoặc đến quầy sân bay; hỗ trợ hotline niêm yết trên website hãng.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Facebook</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Phòng Đào tạo trường đại học thông báo lịch đăng ký môn học học kỳ mới mở từ ngày 22/08 đến 29/08 trên cổng sinh viên. Không yêu cầu thanh toán hay nộp giấy tờ qua tin nhắn.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Phòng khám Gia An nhắc lịch khám tổng quát lúc 8 giờ ngày 26/08. Thanh toán tại quầy sau khi khám, đổi lịch vui lòng gọi số tổng đài trên website phòng khám.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Cuộc gọi</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Hãng hàng không thông báo chuyến bay đổi giờ khởi hành sớm hơn 30 phút. Anh/chị chọn phương án phù hợp trong ứng dụng hoặc liên hệ đại lý đã mua vé. Không yêu cầu cung cấp thông tin thẻ qua email.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Điện lực báo kỳ hạn thanh toán đến ngày 28 hằng tháng. Khách hàng có thể trả tại điểm thu hộ, ứng dụng chính thức hoặc quầy giao dịch; thắc mắc liên hệ tổng đài công ty điện lực khu vực.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Câu lạc bộ lập trình thông báo workshop miễn phí tối thứ Bảy tại phòng Lab trường. Đăng ký bằng form trên website khoa, không thu tiền, link xác nhận gửi từ email tên miền nhà trường.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Telegram</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Nhà tuyển dụng công ty DEF mời ứng tuyển vị trí Junior QA mức lương 8–12 triệu, yêu cầu 6 tháng kinh nghiệm hoặc dự án cá nhân. Gửi CV/portfolio qua careers@def.com, phỏng vấn tại văn phòng hoặc Google Meet lịch hẹn.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>LinkedIn</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Ứng dụng ngân hàng thông báo có phiên bản mới trên App Store/Google Play. Cập nhật trực tiếp trong kho ứng dụng, không tải tệp từ bên thứ ba.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>App push</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Công ty chuyển phát xác nhận bưu kiện đến kho quận 7. Quý khách đặt lịch giao lại trong ứng dụng chính thức hoặc nhận tại bưu cục, thanh toán theo phương thức đã chọn ban đầu.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Siêu thị thông báo đơn hàng đã sẵn sàng nhận tại quầy từ 14–20 giờ hôm nay. Khi đến vui lòng đọc mã đơn và xuất hóa đơn điện tử trong ứng dụng.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Viber</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trung tâm ngoại ngữ xác nhận lịch thi thử IELTS 9 giờ ngày 30/08. Thí sinh mang CMND/CCCD, lệ phí nộp trực tiếp tại quầy thu ngân trung tâm trước khi vào phòng thi.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Đại diện đối tác dự án gửi lịch họp online kèm ID phòng Zoom thuộc tài khoản công ty. Nội dung chỉ là thảo luận tiến độ, không yêu cầu truy cập tài khoản hay cung cấp dữ liệu thẻ.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>WhatsApp</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Ban quản lý tòa nhà thông báo bảo trì thang máy từ 22 giờ đến 5 giờ sáng hôm sau, thang máy số 3 hoạt động bình thường. Cư dân có nhu cầu hỗ trợ liên hệ số trực ban sảnh A.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Zalo</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Shop thông báo đơn hàng đang giao, dự kiến đến ngày mai. Đơn thanh toán khi nhận hàng, nếu đổi thời gian giao liên hệ tổng đài Shopee hoặc chat trong ứng dụng.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Shopee Chat</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Phòng Tài vụ công ty nhắc nhân viên xác nhận thông tin thuế TNCN trên cổng nội bộ trước ngày 31/08. Thao tác đăng nhập bằng tài khoản nội bộ qua SSO công ty, không cung cấp thông tin thẻ.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Email</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Nhà mạng xác nhận đăng ký gói data sinh viên thành công, hiệu lực từ hôm nay đến cuối tháng. Tra cứu và quản lý gói trong ứng dụng chính thức hoặc gọi tổng đài chăm sóc khách hàng.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>SMS</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Trung tâm văn hóa quận mời tham gia lễ hội sách cuối tuần, vé vào cửa miễn phí. Thông tin chi tiết đăng trên website chính thức của trung tâm và tại quầy tiếp tân.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Facebook</category>
+		</QuestionAsset>
+		<QuestionAsset>
+			<questionText>Cửa sổ hỗ trợ của ngân hàng trong ứng dụng hiển thị thông báo bảo mật mới. Hướng dẫn: xem mục Cài đặt trong ứng dụng, mọi hỗ trợ qua tổng đài trên thẻ. Không yêu cầu cung cấp mã xác thực hay dữ liệu thẻ qua ô chat.</questionText>
+			<label>HopPhap</label>
+			<reasons/>
+			<category>Website chat</category>
+		</QuestionAsset>
+	</Questions>
+</Data>
