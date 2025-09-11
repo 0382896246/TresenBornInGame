@@ -388,7 +388,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "HEHEHEHE \nHUHUHU\nHIHIHIHIHI\nHOHOHOHO"
+  m_Text: "Game designer: Nguy\u1EC5n Minh Ph\xE1t\nGame Developer: \nL\xEA Ho\xE0ng
+    T\xE2m\nTr\u1EA7n L\xEA Ho\xE0ng Huy\nTr\u1EA7n Ch\xE2u An\nC\u1EA3m \u01A1n
+    v\xEC \u0111\xE3 ch\u01A1i game c\u1EE7a m\xECnh. "
 --- !u!222 &148041477
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1326,7 +1328,7 @@ MonoBehaviour:
   wrongClip: {fileID: 8300000, guid: f4e77218b16251a4b8f55b57c77b5fa2, type: 3}
   bgmClip: {fileID: 8300000, guid: baf2877e446fe874888384a5ade58b9b, type: 3}
   sfxVolume: 1
-  bgmVolume: 0.6
+  bgmVolume: 0.865
   autoPlayBGM: 1
 --- !u!4 &557150714
 Transform:
@@ -4047,7 +4049,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1090, y: 478.6851}
+  m_SizeDelta: {x: 1090, y: 478.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818716571
 MonoBehaviour:
@@ -4082,7 +4084,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "HEHEHEHE \nHUHUHU\nHIHIHIHIHI\nHOHOHOHO"
+  m_Text: "Mentor: Ph\u1EA1m M\u1EA1nh Trung Nguy\xEAn\nGame Artist:\nHu\u1EF3nh
+    Ng\u1ECDc Minh Anh\nTr\u01B0\u01A1ng Thu\xFD Ph\u01B0\u01A1ng\nNguy\u1EC5n Anh
+    Ki\u1EC7t"
 --- !u!222 &1818716572
 CanvasRenderer:
   m_ObjectHideFlags: 0
