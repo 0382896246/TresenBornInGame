@@ -3767,7 +3767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditContent: {fileID: 1818716570}
-  scrollSpeed: 100
+  scrollSpeed: 80
   closeButton: {fileID: 1897674724}
   creditPanel: {fileID: 320905308}
 --- !u!4 &1689539574
