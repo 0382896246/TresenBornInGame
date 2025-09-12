@@ -5,7 +5,7 @@ public class CreditScroller : MonoBehaviour
 {
     [Header("Cuộn nội dung")]
     public RectTransform creditContent;
-    public float scrollSpeed = 30f;
+    public float scrollSpeed = 50f;
 
     [Header("UI đóng bảng")]
     public Button closeButton;
