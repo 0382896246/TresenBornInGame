@@ -533,7 +533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.874756, y: -0.835495}
+  m_AnchoredPosition: {x: -15.874756, y: 1}
   m_SizeDelta: {x: -225.5884, y: -85.2224}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &144048845
@@ -558,12 +558,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da676f4c88694e8408c6877e8754a7aa, type: 3}
-    m_FontSize: 60
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 60
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9339623, g: 0.92074585, b: 0.92074585, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1199,6 +1199,7 @@ MonoBehaviour:
   progressText: {fileID: 1925741734}
   reasonText: {fileID: 1100480092}
   categoryText: {fileID: 144048845}
+  answerText: {fileID: 1622715904}
   legalButton: {fileID: 135740784}
   scamButton: {fileID: 176321819}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
