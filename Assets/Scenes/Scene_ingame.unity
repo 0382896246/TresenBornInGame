@@ -304,16 +304,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1925741733}
- HEAD
   - {fileID: 1442659930}
-
- Skip
   m_Father: {fileID: 1528633100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 633.21, y: 439}
-  m_SizeDelta: {x: 661.36, y: 185.9342}
+  m_AnchoredPosition: {x: 597.1321, y: 432.47}
+  m_SizeDelta: {x: 725.7347, y: 183.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83089530
 MonoBehaviour:
@@ -537,7 +534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.874756, y: 1}
+  m_AnchoredPosition: {x: -15.874756, y: 3}
   m_SizeDelta: {x: -225.5884, y: -85.2224}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &144048845
@@ -1353,10 +1350,10 @@ MonoBehaviour:
   progressText: {fileID: 1925741734}
   reasonText: {fileID: 1100480092}
   categoryText: {fileID: 144048845}
+  AnswerText: {fileID: 1622715904}
   legalButton: {fileID: 135740784}
   scamButton: {fileID: 176321819}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  skipButton: {fileID: 925105749}
   hearts:
   - full: {fileID: 1096353545}
     empty: {fileID: 158898783}
@@ -1397,7 +1394,7 @@ MonoBehaviour:
   pointsOnMismatch: 1
   score: 0
   maxWrong: 3
-  skipButton: {fileID: 925105746}
+  preMenuDelay: 3
 --- !u!4 &776396685
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,11 +1526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-HEAD
   m_IsActive: 1
-
-  m_IsActive: 0
- Skip
 --- !u!224 &925105747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1551,8 +1544,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -286}
-  m_SizeDelta: {x: 429.5503, y: 109.1006}
+  m_AnchoredPosition: {x: 88.72705, y: -286}
+  m_SizeDelta: {x: 152.0961, y: 109.1006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &925105748
 MonoBehaviour:
@@ -1616,20 +1609,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 776396684}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-HEAD
-        m_MethodName: PlayerAnswer
-        m_Mode: 6
-
         m_MethodName: SkipButton
         m_Mode: 1
- Skip
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &925105750
 MonoBehaviour:
@@ -2006,7 +1994,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005365779}
   m_CullTransparentMesh: 1
-HEAD
 --- !u!1 &1007421452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,8 +2069,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007421452}
   m_CullTransparentMesh: 1
-
- Skip
 --- !u!1 &1040524128
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,7 +2995,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "H\u1EE3p ph\xE1p"
+  m_Text: "B\u1EA3ng l\xED do"
 --- !u!222 &1622715905
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3688,13 +3673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
- HEAD
-  m_Text: 'Skip
-
-'
-
-  m_Text: ">>>> minh h\u1ECDa q"
- Skip
+  m_Text: '>>>'
 --- !u!222 &1807871940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3737,14 +3716,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-HEAD
-  m_AnchoredPosition: {x: 196.69727, y: -51}
-  m_SizeDelta: {x: -484.139, y: 69.507}
-
-  m_AnchoredPosition: {x: 172, y: -51}
-  m_SizeDelta: {x: -434.7445, y: 70.7735}
- Skip
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 170, y: -91}
+  m_SizeDelta: {x: -536.3803, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925741734
 MonoBehaviour:
   m_ObjectHideFlags: 0
