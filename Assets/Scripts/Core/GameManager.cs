@@ -29,11 +29,21 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+ 
+    void Start()
+    {
+        // Nếu trước đó có dùng Time.timeScale = 0 ở màn trước, đảm bảo bật lại:
+        Time.timeScale = 1f;
+
+        StartGame();
+    }
+
+
     bool match=false;
     private int dem=0;
     private bool chosen=false;
     [SerializeField] GameObject skipButton;
-    void Start() { StartGame(); }
+ 
 
     //void Update()
     //{
@@ -52,11 +62,16 @@ public class GameManager : MonoBehaviour
     {
         skipButton.SetActive(chosen);
     }
-    public void StartGame()
+     public void StartGame()
     {
         
         wrongCount = 0;
         isPlaying = true;
+
+
+     
+
+
         chosen=false;
         LoadNext();
     }
@@ -68,7 +83,7 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
            
             uiManager.ShowGameWin();
-            GameOver();
+         
             audioManager?.PlayBGM();  // Play background music when the game wins
             return;
         }
@@ -97,21 +112,17 @@ public class GameManager : MonoBehaviour
         // Luôn hiển thị NHÃN ĐÚNG của câu hỏi + lý do:
         uiManager.ShowReason(currentQuestion);
 
-        CheckAfter(match);
+     
        
     }
-
-   
-
-
     public void SkipButton()
     {
-        if(!chosen) return; 
+        if (!chosen) return;
         // Kiểm tra ngưỡng sai: "sai QUÁ 3" => > 3
         if (wrongCount >= maxWrong)
         {
             GameOver();
-            
+
         }
         else
         {
@@ -121,11 +132,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-        private void CheckAfter(bool match)
+    private void CheckAfter(bool match)
     {
-    
+
         uiManager.SetButtonsInteractable(false);
-        
+
         ApplyScore(match);
         if (!match) wrongCount++;
 
@@ -140,10 +151,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-           // score -= pointsOnMismatch;
+            // score -= pointsOnMismatch;
             audioManager?.PlayWrong();   // Play wrong sound when answer is incorrect
         }
-      //  uiManager.UpdateScore(score);
+        //  uiManager.UpdateScore(score);
     }
 
     private void GameOver()
@@ -161,7 +172,7 @@ public class GameManager : MonoBehaviour
 
         // Hiển thị Game Over UI sau khi delay
         bool isWin = score >= (questionManager.TotalRounds - maxWrong);  // Ví dụ: game thắng nếu điểm >= tổng câu hỏi - maxWrong
-        if(score < 0) score = 0;
+        if (score < 0) score = 0;
         gameOverUI.ShowGameOver(isWin, score, questionManager.TotalRounds); // Hiển thị Game Over UI
 
         audioManager?.StopBGM();   // Dừng nhạc nền khi game kết thúc
@@ -169,7 +180,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;  // Dừng thời gian khi game over
     }
 
-
-
+  
 
 }

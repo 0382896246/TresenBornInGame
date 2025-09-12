@@ -23,6 +23,25 @@ public class UIManager : MonoBehaviour
     public Color warningColor = Color.red;
 
 
+    // ---------- HEARTS ----------
+    [System.Serializable]
+    public class HeartPair
+    {
+        public Image full;   // Ảnh trái tim đỏ (còn mạng)
+        public Image empty;  // Ảnh trái tim xám (mất mạng)
+
+        public void SetAlive(bool alive)
+        {
+            if (full) full.gameObject.SetActive(alive);
+            if (empty) empty.gameObject.SetActive(!alive);
+        }
+    }
+
+    [Header("Hearts (Full + Empty)")]
+    public HeartPair[] hearts; // Kéo 3 cặp (Heart1/2/3) vào đây
+
+
+
     void Start()
     {
        
