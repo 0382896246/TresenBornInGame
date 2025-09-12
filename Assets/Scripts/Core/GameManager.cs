@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
@@ -28,29 +29,23 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-   
+    void Start()
+    {
+        // Nếu trước đó có dùng Time.timeScale = 0 ở màn trước, đảm bảo bật lại:
+        Time.timeScale = 1f;
 
-    void Start() { StartGame(); }
-
-    //void Update()
-    //{
-    //    if (!isPlaying || isRevealing) return;
-
-    //    timeRemaining -= Time.deltaTime;
-    //  //  uiManager.UpdateTimer(timeRemaining);
-
-    //    if (timeRemaining <= 0f)
-    //    {
-    //        // Hết giờ: coi như CHỌN KHÁC NHÃN -> trừ điểm, tăng wrongCount
-    //        OnTimeout();
-    //    }
-    //}
+        StartGame();
+    }
 
     public void StartGame()
     {
-        
         wrongCount = 0;
         isPlaying = true;
+
+        // Cập nhật trái tim ở UI theo số lần sai ban đầu (0)
+        if (uiManager != null)
+            uiManager.UpdateHearts(wrongCount, maxWrong);
+
         LoadNext();
     }
 
@@ -67,11 +62,9 @@ public class GameManager : MonoBehaviour
 
         currentQuestion = questionManager.NextQuestion(); // Câu hỏi tiếp theo
 
-        // Đảm bảo không gọi LoadNext() khi chưa kết thúc việc hiển thị câu hỏi
         uiManager.ShowQuestion(currentQuestion, questionManager.CurrentIndex, questionManager.TotalRounds);
         uiManager.SetButtonsInteractable(true);
     }
-
 
     // Gọi từ 2 nút: HỢP PHÁP(true) / LỪA ĐẢO(false)
     public void PlayerAnswer(bool choseLegal)
@@ -86,25 +79,26 @@ public class GameManager : MonoBehaviour
         StartCoroutine(NextAfter(match, reasonRevealDelay));
     }
 
-    //private void OnTimeout()
-    //{
-    //    // Hết giờ vẫn show NHÃN ĐÚNG của câu:
-    //    uiManager.ShowReason(currentQuestion);
-    //    StartCoroutine(NextAfter(match: false, reasonRevealDelay));
-    //}
-
     private IEnumerator NextAfter(bool match, float delay)
     {
         isRevealing = true;
         uiManager.SetButtonsInteractable(false);
 
         ApplyScore(match);
-        if (!match) wrongCount++;
+
+        if (!match)
+        {
+            wrongCount++;
+
+            // Cập nhật trái tim ngay khi sai
+            if (uiManager != null)
+                uiManager.UpdateHearts(wrongCount, maxWrong);
+        }
 
         // Giữ bảng lý do cho người chơi đọc
         yield return new WaitForSeconds(delay);
 
-        // Kiểm tra ngưỡng sai: "sai QUÁ 3" => > 3
+        // Kiểm tra ngưỡng sai: "sai QUÁ 3" => >= maxWrong
         if (wrongCount >= maxWrong)
         {
             GameOver();
@@ -124,36 +118,33 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-           // score -= pointsOnMismatch;
+            // score -= pointsOnMismatch;
             audioManager?.PlayWrong();   // Play wrong sound when answer is incorrect
         }
-      //  uiManager.UpdateScore(score);
+        // uiManager.UpdateScore(score);
     }
 
     private void GameOver()
     {
         isPlaying = false;
 
-        // Gọi Coroutine để delay 5 giây trước khi hiển thị GameOver UI
+        // Dừng tương tác nút
+        uiManager.SetButtonsInteractable(false);
+
+        // Gọi Coroutine để delay rồi hiện GameOver UI
         StartCoroutine(ShowGameOverAfterDelay(3f));
     }
 
     private IEnumerator ShowGameOverAfterDelay(float delay)
     {
-        // Đợi trong thời gian delay
         yield return new WaitForSeconds(delay);
 
-        // Hiển thị Game Over UI sau khi delay
-        bool isWin = score >= (questionManager.TotalRounds - maxWrong);  // Ví dụ: game thắng nếu điểm >= tổng câu hỏi - maxWrong
-        if(score < 0) score = 0;
-        gameOverUI.ShowGameOver(isWin, score, questionManager.TotalRounds); // Hiển thị Game Over UI
+        bool isWin = score >= (questionManager.TotalRounds - maxWrong);
+        if (score < 0) score = 0;
 
-        audioManager?.StopBGM();   // Dừng nhạc nền khi game kết thúc
-        uiManager.SetButtonsInteractable(false);  // Tắt các nút khi game over
+        gameOverUI.ShowGameOver(isWin, score, questionManager.TotalRounds);
+
+        audioManager?.StopBGM();
         Time.timeScale = 0f;  // Dừng thời gian khi game over
     }
-
-
-
-
 }
