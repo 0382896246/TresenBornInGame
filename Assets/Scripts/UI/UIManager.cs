@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public Text progressText;     // 3/10
     public Text reasonText;       // bullet lý do sau khi trả lời
     public Text categoryText;     // ô "Loại:" (tuỳ chọn)
+    public Text answerText;
     //public Text timerText;        // đếm ngược
     //public Text scoreText;        // điểm (nếu có 1 text riêng cho điểm)
 
@@ -40,7 +41,7 @@ public class UIManager : MonoBehaviour
 
         if (progressText) progressText.text = $"{index}/{total}";
         if (reasonText) reasonText.text = ""; // Clear lý do cũ
-
+        if (answerText) answerText.text = "Bảng lí do";
         SetButtonsInteractable(true);
     }
 
@@ -60,7 +61,7 @@ public class UIManager : MonoBehaviour
         if (q == null || reasonText == null) return;
 
         var sb = new StringBuilder();
-        sb.AppendLine(q.IsLegal ? "✔ HỢP PHÁP" : "⚠ LỪA ĐẢO");
+       answerText.text= q.IsLegal ? "✔ HỢP PHÁP" : "⚠ LỪA ĐẢO";
 
         if (q.reasons != null && q.reasons.Length > 0)
         {

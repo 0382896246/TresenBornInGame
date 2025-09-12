@@ -1277,6 +1277,7 @@ MonoBehaviour:
   progressText: {fileID: 1925741734}
   reasonText: {fileID: 1100480092}
   categoryText: {fileID: 144048845}
+  answerText: {fileID: 1622715904}
   legalButton: {fileID: 135740784}
   scamButton: {fileID: 176321819}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
