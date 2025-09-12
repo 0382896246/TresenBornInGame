@@ -22,8 +22,10 @@ public class UIManager : MonoBehaviour
     public Color normalColor = Color.white;
     public Color warningColor = Color.red;
 
+
     void Start()
     {
+       
         if (reasonText) reasonText.text = "";
         //if (timerText) timerText.color = normalColor;
     }
@@ -111,6 +113,7 @@ public class UIManager : MonoBehaviour
     {
         if (legalButton) legalButton.interactable = value;
         if (scamButton) scamButton.interactable = value;
+        
     }
 
     // Thông báo khi chiến thắng
