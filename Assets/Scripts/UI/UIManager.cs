@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public Color normalColor = Color.white;
     public Color warningColor = Color.red;
 
+HEAD
     // ---------- HEARTS ----------
     [System.Serializable]
     public class HeartPair
@@ -37,9 +38,11 @@ public class UIManager : MonoBehaviour
 
     [Header("Hearts (Full + Empty)")]
     public HeartPair[] hearts; // Kéo 3 cặp (Heart1/2/3) vào đây
+ Skip
 
     void Start()
     {
+       
         if (reasonText) reasonText.text = "";
         // if (timerText) timerText.color = normalColor;
     }
@@ -89,6 +92,7 @@ public class UIManager : MonoBehaviour
     {
         if (legalButton) legalButton.interactable = value;
         if (scamButton) scamButton.interactable = value;
+        
     }
 
     // Thông báo khi chiến thắng

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class GameManager : MonoBehaviour
     private int wrongCount = 0;
 
     [Header("Thời gian & nhịp hiển thị")]
-    [SerializeField] private float reasonRevealDelay = 1.25f; // giữ bảng lí do trước khi sang câu
-    private bool isRevealing = false;                         // đang hiển thị lý do -> tạm dừng timer
+   // [SerializeField] private float reasonRevealDelay = 1.25f; // giữ bảng lí do trước khi sang câu
+   // private bool isRevealing = false;                         // đang hiển thị lý do -> tạm dừng timer
     private bool isPlaying = false;
 
     private QuestionAsset currentQuestion;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+ HEAD
     void Start()
     {
         // Nếu trước đó có dùng Time.timeScale = 0 ở màn trước, đảm bảo bật lại:
@@ -37,15 +39,44 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
+
+    bool match=false;
+    private int dem=0;
+    private bool chosen=false;
+    [SerializeField] GameObject skipButton;
+    void Start() { StartGame(); }
+
+    //void Update()
+    //{
+    //    if (!isPlaying || isRevealing) return;
+
+    //    timeRemaining -= Time.deltaTime;
+    //  //  uiManager.UpdateTimer(timeRemaining);
+
+    //    if (timeRemaining <= 0f)
+    //    {
+    //        // Hết giờ: coi như CHỌN KHÁC NHÃN -> trừ điểm, tăng wrongCount
+    //        OnTimeout();
+    //    }
+    //}
+    private void Update()
+    {
+        skipButton.SetActive(chosen);
+    }
+ Skip
     public void StartGame()
     {
         wrongCount = 0;
         isPlaying = true;
+ HEAD
 
         // Cập nhật trái tim ở UI theo số lần sai ban đầu (0)
         if (uiManager != null)
             uiManager.UpdateHearts(wrongCount, maxWrong);
 
+
+        chosen=false;
+Skip
         LoadNext();
     }
 
@@ -54,12 +85,14 @@ public class GameManager : MonoBehaviour
         if (!questionManager.HasNext())
         {
             isPlaying = false;
+           
             uiManager.ShowGameWin();
             GameOver();
             audioManager?.PlayBGM();  // Play background music when the game wins
             return;
         }
-
+        dem = 0;
+        chosen = false;
         currentQuestion = questionManager.NextQuestion(); // Câu hỏi tiếp theo
 
         uiManager.ShowQuestion(currentQuestion, questionManager.CurrentIndex, questionManager.TotalRounds);
@@ -69,16 +102,23 @@ public class GameManager : MonoBehaviour
     // Gọi từ 2 nút: HỢP PHÁP(true) / LỪA ĐẢO(false)
     public void PlayerAnswer(bool choseLegal)
     {
-        if (!isPlaying || currentQuestion == null || isRevealing) return;
-
-        bool match = (currentQuestion.IsLegal == choseLegal);
-
+        if (!isPlaying || currentQuestion == null) return;
+         match = (currentQuestion.IsLegal == choseLegal);
+        
+            dem++;
+        
+        if (dem == 1)
+        {
+            chosen = true;
+        }
         // Luôn hiển thị NHÃN ĐÚNG của câu hỏi + lý do:
         uiManager.ShowReason(currentQuestion);
 
-        StartCoroutine(NextAfter(match, reasonRevealDelay));
+        CheckAfter(match);
+       
     }
 
+HEAD
     private IEnumerator NextAfter(bool match, float delay)
     {
         isRevealing = true;
@@ -99,14 +139,36 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Kiểm tra ngưỡng sai: "sai QUÁ 3" => >= maxWrong
+
+   
+
+
+    public void SkipButton()
+    {
+        if(!chosen) return; 
+        // Kiểm tra ngưỡng sai: "sai QUÁ 3" => > 3
+ Skip
         if (wrongCount >= maxWrong)
         {
             GameOver();
-            yield break;
+            
+        }
+        else
+        {
+            LoadNext();
         }
 
-        isRevealing = false;
-        LoadNext();
+
+    }
+
+        private void CheckAfter(bool match)
+    {
+    
+        uiManager.SetButtonsInteractable(false);
+        
+        ApplyScore(match);
+        if (!match) wrongCount++;
+
     }
 
     private void ApplyScore(bool match)

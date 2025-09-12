@@ -304,7 +304,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1925741733}
+ HEAD
   - {fileID: 1442659930}
+
+ Skip
   m_Father: {fileID: 1528633100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1394,7 +1397,7 @@ MonoBehaviour:
   pointsOnMismatch: 1
   score: 0
   maxWrong: 3
-  reasonRevealDelay: 1.25
+  skipButton: {fileID: 925105746}
 --- !u!4 &776396685
 Transform:
   m_ObjectHideFlags: 0
@@ -1526,7 +1529,11 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+HEAD
   m_IsActive: 1
+
+  m_IsActive: 0
+ Skip
 --- !u!224 &925105747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1609,8 +1616,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 776396684}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+HEAD
         m_MethodName: PlayerAnswer
         m_Mode: 6
+
+        m_MethodName: SkipButton
+        m_Mode: 1
+ Skip
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1994,6 +2006,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005365779}
   m_CullTransparentMesh: 1
+HEAD
 --- !u!1 &1007421452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2082,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007421452}
   m_CullTransparentMesh: 1
+
+ Skip
 --- !u!1 &1040524128
 GameObject:
   m_ObjectHideFlags: 0
@@ -3673,9 +3688,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
+ HEAD
   m_Text: 'Skip
 
 '
+
+  m_Text: ">>>> minh h\u1ECDa q"
+ Skip
 --- !u!222 &1807871940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3718,8 +3737,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
+HEAD
   m_AnchoredPosition: {x: 196.69727, y: -51}
   m_SizeDelta: {x: -484.139, y: 69.507}
+
+  m_AnchoredPosition: {x: 172, y: -51}
+  m_SizeDelta: {x: -434.7445, y: 70.7735}
+ Skip
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1925741734
 MonoBehaviour:
