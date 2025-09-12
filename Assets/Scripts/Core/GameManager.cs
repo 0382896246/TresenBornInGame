@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     bool match=false;
     private int dem=0;
     private bool chosen=false;
+    [SerializeField] GameObject skipButton;
     void Start() { StartGame(); }
 
     //void Update()
@@ -47,7 +48,10 @@ public class GameManager : MonoBehaviour
     //        OnTimeout();
     //    }
     //}
-
+    private void Update()
+    {
+        skipButton.SetActive(chosen);
+    }
     public void StartGame()
     {
         
