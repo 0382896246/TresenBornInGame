@@ -34,7 +34,7 @@ public class LoopingCreditScroll : MonoBehaviour
     void Update()
     {
         // Cuộn toàn bộ container lên
-        scrollContainer.anchoredPosition += Vector2.up * scrollSpeed * Time.unscaledDeltaTime;
+        scrollContainer.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
 
         // Khi đã cuộn hết A → B, thì quay về đầu (trượt mượt)
         if (scrollContainer.anchoredPosition.y >= contentHeight)
