@@ -25,9 +25,28 @@ public class GameManager : MonoBehaviour
     private bool endSequenceRunning = false;
     [SerializeField] private float preMenuDelay = 5f;  // đợi 5s trước khi mở GameOver menu
 
+    // ✨ thêm: có tự start khi vào scene không?
+    [SerializeField] private bool startOnAwake = false;
+
     private void Start()
     {
         if (uiManager != null) uiManager.WireButtons(this); // UI gán sự kiện cho 3 nút
+
+        if (startOnAwake)
+        {
+            StartGame();
+        }
+        else
+        {
+            // chờ intro
+            uiManager?.ShowSkip(false);
+            uiManager?.SetButtonsInteractable(false);
+        }
+    }
+
+    // ✨ thêm: để Intro gọi sau khi chạy xong
+    public void StartGameFromIntro()
+    {
         StartGame();
     }
 
@@ -141,5 +160,4 @@ public class GameManager : MonoBehaviour
         int correct = Mathf.Clamp(score, 0, total);           // pointsOnMatch = 1 => score = số câu đúng
         gameOverUI.ShowGameOver(isWin, correct, total);
     }
-
 }
