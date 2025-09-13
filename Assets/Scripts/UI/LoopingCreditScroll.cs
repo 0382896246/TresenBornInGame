@@ -1,45 +1,79 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(RectTransform))]
 public class LoopingCreditScroll : MonoBehaviour
 {
-    public RectTransform scrollContainer;    // Cha chứa A và B
-    public float scrollSpeed = 30f;
+    [Header("Refs")]
+    public RectTransform contentA;   // khối chứa chữ (Credit) – pivot = (0.5, 0)
+    public RectTransform viewport;   // khung che (có Mask/RectMask2D)
 
-    private RectTransform contentA;
-    private RectTransform contentB;
-    private float contentHeight;
+    [Header("Scroll")]
+    public float scrollSpeed = 50f;  // px/giây
+    public bool useUnscaledTime = true;
+    public bool loop = true;         // true: lặp mãi; false: chạy 1 lần rồi dừng
 
-    void Start()
+    float startY, contentH, viewportH;
+    bool run;
+
+    void OnEnable() => InitAndStart();
+
+    void InitAndStart()
     {
-        if (scrollContainer == null || scrollContainer.childCount < 2)
+        if (!contentA) contentA = GetComponent<RectTransform>();
+        if (!contentA || !viewport)
         {
-            Debug.LogError("[LoopingCreditScroll] Chưa gán đúng hoặc thiếu nội dung!");
-            return;
+            Debug.LogError("[Credit] Chưa gán contentA/viewport");
+            run = false; return;
         }
 
-        contentA = scrollContainer.GetChild(0).GetComponent<RectTransform>();
-        contentB = scrollContainer.GetChild(1).GetComponent<RectTransform>();
+        // Ép width = viewport để Text wrap đúng, rồi rebuild để đo chiều cao chuẩn
+        contentA.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, viewport.rect.width);
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(viewport);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentA);
+        Canvas.ForceUpdateCanvases();
 
-        // Lấy chiều cao nội dung (phải giống nhau!)
-        contentHeight = contentA.rect.height;
+        // Lấy chiều cao (ưu tiên preferred height nếu cần)
+        float h1 = contentA.rect.height;
+        float h2 = LayoutUtility.GetPreferredHeight(contentA);
+        contentH = Mathf.Max(h1, h2, 1f);
+        viewportH = Mathf.Max(viewport.rect.height, 1f);
 
-        // Gán vị trí: A ở trên, B bên dưới
-        contentA.anchoredPosition = Vector2.zero;
-        contentB.anchoredPosition = new Vector2(0, -contentHeight);
+        // BẮT ĐẦU từ dòng đầu: để đáy content nằm ngay dưới mép dưới viewport
+        // YÊU CẦU: pivot của contentA = (0.5, 0)
+        startY = -viewportH;
+        var pos = contentA.anchoredPosition;
+        contentA.anchoredPosition = new Vector2(pos.x, startY);
 
-        // Reset container về (0, 0)
-        scrollContainer.anchoredPosition = Vector2.zero;
+        run = true;
+
+        if (contentH <= 5f)
+            Debug.LogWarning("[Credit] content height quá nhỏ. Hãy bật Content Size Fitter (Vertical=Preferred Size).");
     }
 
     void Update()
     {
-        // Cuộn toàn bộ container lên
-        scrollContainer.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+        if (!run) return;
 
-        // Khi đã cuộn hết A → B, thì quay về đầu (trượt mượt)
-        if (scrollContainer.anchoredPosition.y >= contentHeight)
+        float dt = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+        float dy = scrollSpeed * dt;
+
+        contentA.anchoredPosition += new Vector2(0f, dy);
+
+        // Khi toàn bộ content đã đi qua viewport
+        if (contentA.anchoredPosition.y >= contentH)
         {
-            scrollContainer.anchoredPosition -= new Vector2(0, contentHeight);
+            if (loop)
+            {
+                // Lặp lại từ đầu
+                contentA.anchoredPosition = new Vector2(contentA.anchoredPosition.x, startY);
+            }
+            else
+            {
+                // Dừng tại cuối
+                run = false;
+            }
         }
     }
 }
