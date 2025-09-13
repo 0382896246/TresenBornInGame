@@ -3863,6 +3863,7 @@ MonoBehaviour:
   blinkOut: 0.35
   zoomExtra: 1.05
   gameManager: {fileID: 776396684}
+  forceShowIntro: 0
 --- !u!1 &1894997267
 GameObject:
   m_ObjectHideFlags: 0

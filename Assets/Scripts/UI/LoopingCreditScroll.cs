@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class LoopingCreditScroll : MonoBehaviour
 {
     [Header("Refs")]
-    public RectTransform contentA;   // khối chứa chữ (Credit) – pivot = (0.5, 0)
-    public RectTransform viewport;   // khung che (có Mask/RectMask2D)
+    public RectTransform contentA;   // Khối chứa chữ (Credit) – pivot = (0.5, 0)
+    public RectTransform viewport;   // Khung che (có Mask/RectMask2D)
 
     [Header("Scroll")]
     public float scrollSpeed = 50f;  // px/giây
@@ -61,17 +61,18 @@ public class LoopingCreditScroll : MonoBehaviour
 
         contentA.anchoredPosition += new Vector2(0f, dy);
 
-        // Khi toàn bộ content đã đi qua viewport
-        if (contentA.anchoredPosition.y >= contentH)
+        // Tính quãng đường đã cuộn
+        float traveled = contentA.anchoredPosition.y - startY;
+
+        // Khi toàn bộ content đã chạy qua hết viewport → reset/dừng
+        if (traveled >= contentH + viewportH)
         {
             if (loop)
             {
-                // Lặp lại từ đầu
                 contentA.anchoredPosition = new Vector2(contentA.anchoredPosition.x, startY);
             }
             else
             {
-                // Dừng tại cuối
                 run = false;
             }
         }

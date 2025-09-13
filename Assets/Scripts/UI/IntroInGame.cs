@@ -11,8 +11,8 @@ public class IntroInGame_NoOverlap : MonoBehaviour
     [Header("Roots")]
     [SerializeField] GameObject inGameRoot;      // Canvas/InGame (tắt sẵn)
     [SerializeField] GameObject introRoot;       // Canvas/Intro (bật sẵn)
-    [SerializeField] RectTransform zoomRoot;     // 👈 PARENT để phóng to (chứa BG + screenWindow)
-    [SerializeField] RectTransform screenWindow; // 👈 Ô đích cần zoom tới (child của zoomRoot)
+    [SerializeField] RectTransform zoomRoot;     // PARENT để phóng to (chứa BG + screenWindow)
+    [SerializeField] RectTransform screenWindow; // Ô đích cần zoom tới (child của zoomRoot)
 
     [Header("UI")]
     [SerializeField] Image bg;                   // Image hiển thị slide (con của zoomRoot)
@@ -23,9 +23,9 @@ public class IntroInGame_NoOverlap : MonoBehaviour
     [SerializeField] int revealAfterIndex = 2;                 // zoom sau ảnh thứ mấy (index)
 
     [Header("Timing")]
-    [SerializeField] float fadeDuration = 0.6f;  // fade mở intro
-    [SerializeField] float slideFade = 0.35f;  // fade giữa các slide
-    [SerializeField] float zoomDuration = 1.1f;  // thời gian zoom
+    [SerializeField] float fadeDuration = 0.6f;   // fade mở intro
+    [SerializeField] float slideFade = 0.35f;     // fade giữa các slide
+    [SerializeField] float zoomDuration = 1.1f;   // thời gian zoom
 
     // nháy rồi chuyển sang InGame
     [SerializeField] float blinkIn = 0.25f;
@@ -38,10 +38,34 @@ public class IntroInGame_NoOverlap : MonoBehaviour
     [Header("Managers")]
     [SerializeField] GameManager gameManager;
 
+    [Header("Intro Once Settings")]
+    [Tooltip("Tick để luôn ép hiển thị Intro (debug). Bỏ tick để chạy logic chỉ-hiện-lần-đầu.")]
+    [SerializeField] bool forceShowIntro = false;
+
+    const string INTRO_SEEN_KEY = "INTRO_SEEN_FLAG";
     RectTransform canvasRT;
 
     void Awake()
     {
+        // Nếu đã xem Intro (và không ép hiện), bỏ qua Intro và vào game ngay
+        if (HasSeenIntro() && !forceShowIntro)
+        {
+            if (!inGameRoot || !introRoot || !gameManager)
+            {
+                Debug.LogError("[Intro] Missing refs để skip intro! Kéo đủ InGameRoot, IntroRoot, GameManager.");
+                // Nếu thiếu ref thì thôi cứ chạy như cũ để tránh đen màn
+            }
+            else
+            {
+                introRoot.SetActive(false);
+                inGameRoot.SetActive(true);
+                // Bắt đầu game ngay (giữ nguyên flow cũ)
+                gameManager.StartGameFromIntro();
+                enabled = false; // tắt script vì Intro không cần chạy nữa
+                return;
+            }
+        }
+
         canvasRT = GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
 
         if (!inGameRoot || !introRoot || !bg || !fade || !zoomRoot || !screenWindow || !canvasRT || !gameManager)
@@ -64,14 +88,14 @@ public class IntroInGame_NoOverlap : MonoBehaviour
 
     IEnumerator Run()
     {
-        if (slides.Count == 0) { yield return SwitchDuringBlink(); yield break; }
+        if (slides.Count == 0) { yield return SwitchDuringBlink_AndMarkSeen(); yield break; }
 
         // Slide đầu: hiện từ đen
         bg.sprite = slides[0].sprite;
         yield return Fade(1f, 0f, fadeDuration);
         yield return new WaitForSeconds(slides[0].hold);
 
-        // Các slide tiếp theo: fade-out -> đổi ảnh -> fade-in -> hold
+        // Các slide tiếp theo
         for (int i = 1; i < slides.Count; i++)
         {
             yield return Fade(0f, 1f, slideFade);
@@ -81,7 +105,6 @@ public class IntroInGame_NoOverlap : MonoBehaviour
 
             if (i == revealAfterIndex)
             {
-                // Trong lúc zoom, bg sẽ fade-in từ 0 -> 1 để có cảm giác "xuất hiện"
                 var c = bg.color; c.a = 0f; bg.color = c;
                 yield return ZoomRectToFillAndFadeIn();
                 break;
@@ -89,20 +112,17 @@ public class IntroInGame_NoOverlap : MonoBehaviour
         }
 
         // Nháy & chuyển sang InGame ngay trong lúc đang đen
-        yield return SwitchDuringBlink();
+        yield return SwitchDuringBlink_AndMarkSeen();
     }
 
     // ===== ZOOM UI bằng RectTransform (không dùng camera) =====
     IEnumerator ZoomRectToFillAndFadeIn()
     {
-        // scale cần để screenWindow phủ hết Canvas
         float sW = canvasRT.rect.width / screenWindow.rect.width;
         float sH = canvasRT.rect.height / screenWindow.rect.height;
         float targetScale = Mathf.Max(sW, sH) * Mathf.Max(1f, zoomExtra);
 
-        // ta zoom parent (zoomRoot). Để tâm screenWindow ra giữa Canvas:
-        // vị trí hiệu quả sau scale = scale * childPos + parentPos -> parentPos = -scale * childPos
-        Vector2 childPos = screenWindow.anchoredPosition;            // (anchors center)
+        Vector2 childPos = screenWindow.anchoredPosition; // (anchors center)
         Vector3 startScale = zoomRoot.localScale;
         Vector2 startPos = zoomRoot.anchoredPosition;
 
@@ -116,7 +136,6 @@ public class IntroInGame_NoOverlap : MonoBehaviour
             zoomRoot.localScale = Vector3.Lerp(startScale, endScale, k);
             zoomRoot.anchoredPosition = Vector2.Lerp(startPos, endPos, k);
 
-            // BG alpha 0 -> 1 khi đang zoom
             var c = bg.color; c.a = Mathf.Lerp(0f, 1f, k); bg.color = c;
 
             t += Time.deltaTime; yield return null;
@@ -125,14 +144,17 @@ public class IntroInGame_NoOverlap : MonoBehaviour
         zoomRoot.anchoredPosition = endPos;
     }
 
-    // ===== Blink + Switch =====
-    IEnumerator SwitchDuringBlink()
+    // ===== Blink + Switch + ĐÁNH DẤU ĐÃ XEM =====
+    IEnumerator SwitchDuringBlink_AndMarkSeen()
     {
         yield return Fade(0f, 1f, blinkIn);
         yield return new WaitForSecondsRealtime(blinkHold);
 
         introRoot.SetActive(false);
         inGameRoot.SetActive(true);
+
+        // Đánh dấu "đã xem Intro" để các lần reload sau sẽ bỏ qua
+        MarkIntroSeen();
 
         gameManager.StartGameFromIntro();
 
@@ -153,4 +175,22 @@ public class IntroInGame_NoOverlap : MonoBehaviour
     }
 
     void SetAlpha(Image img, float a) { var c = img.color; c.a = a; img.color = c; }
+
+    // ===== PlayerPrefs helpers =====
+    static bool HasSeenIntro() => PlayerPrefs.GetInt(INTRO_SEEN_KEY, 0) == 1;
+
+    static void MarkIntroSeen()
+    {
+        PlayerPrefs.SetInt(INTRO_SEEN_KEY, 1);
+        PlayerPrefs.Save();
+    }
+
+    // Tuỳ chọn: hàm public để reset flag khi cần debug
+    [ContextMenu("Reset Intro Seen Flag")]
+    public void ResetIntroFlagForDebug()
+    {
+        PlayerPrefs.DeleteKey(INTRO_SEEN_KEY);
+        PlayerPrefs.Save();
+        Debug.Log("[Intro] Đã xoá cờ INTRO_SEEN_FLAG (debug).");
+    }
 }
