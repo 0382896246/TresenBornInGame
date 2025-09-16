@@ -4171,11 +4171,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mentor: \nPh\u1EA1m M\u1EA1nh Trung Nguy\xEAn\nGame Artist:\nHu\u1EF3nh
-    Ng\u1ECDc Minh Anh\nTr\u01B0\u01A1ng Thu\xFD Ph\u01B0\u01A1ng\nNguy\u1EC5n Anh
-    Ki\u1EC7t\nGame designer: \nPh\u1EA1m Minh Ph\xE1t\nGame Developer: \nL\xEA Ho\xE0ng
-    T\xE2m\nTr\u1EA7n L\xEA Ho\xE0ng Huy\nTr\u1EA7n Ch\xE2u An\nC\u1EA3m \u01A1n
-    v\xEC \u0111\xE3 ch\u01A1i game c\u1EE7a m\xECnh. "
+  m_Text: "Mentor: \nPh\u1EA1m M\u1EA1nh Trung Nguy\xEAn\n\nGame Designer: \nPh\u1EA1m
+    Minh Ph\xE1t\n\nGame Artist:\nHu\u1EF3nh Ng\u1ECDc Minh Anh     Tr\u01B0\u01A1ng
+    Thu\xFD Ph\u01B0\u01A1ng\nNguy\u1EC5n Anh Ki\u1EC7t               H\u1ED3 Tr\u1EA7n
+    Ho\xE0n Huy\n\nGame Developer: \nL\xEA Ho\xE0ng T\xE2m                   Tr\u1EA7n
+    L\xEA Ho\xE0ng Huy\nTr\u1EA7n Ch\xE2u An\n\nC\u1EA3m \u01A1n v\xEC \u0111\xE3
+    ch\u01A1i game c\u1EE7a m\xECnh. "
 --- !u!222 &1818716572
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4198,7 +4199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentA: {fileID: 1818716570}
   viewport: {fileID: 1880511325}
-  scrollSpeed: 50
+  scrollSpeed: 30
   useUnscaledTime: 1
   loop: 1
 --- !u!114 &1818716574
@@ -5386,6 +5387,8 @@ MonoBehaviour:
   showStartMenu: 1
   autoStartGame: 0
   postDelay: 0.2
+  allowDoubleClickSkip: 1
+  doubleClickMaxDelay: 0.35
 --- !u!114 &6502900578211309494
 MonoBehaviour:
   m_ObjectHideFlags: 0
