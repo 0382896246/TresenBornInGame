@@ -1,173 +1,65 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IntroInGame : MonoBehaviour
 {
-    [System.Serializable]
-    public class Slide { public Sprite sprite; public float hold = 2f; }
+    [Header("References in this scene")]
+    public PlayableDirector director;     // để trống cũng được, script sẽ tự tìm trong con
+    public GameObject startMenuRoot;      // panel màn hình Start (trong Canvas)
+    private GameObject hudRoot;            // HUD khi chơi (nếu có, có thể để trống)
+    private GameManager gameManager;       // để gọi StartGameFromIntro nếu muốn
 
-    [Header("Roots")]
-    [SerializeField] GameObject inGameRoot;
-    [SerializeField] GameObject introRoot;
-    [SerializeField] RectTransform zoomRoot;
-    [SerializeField] RectTransform screenWindow;
+    [Header("Behaviour")]
+    public bool showStartMenu = true;     // true = hiện menu Start sau intro
+    public bool autoStartGame = false;    // true = tự vào game, gọi StartGameFromIntro()
+    public float postDelay = 0.5f;        // chờ 0.5s sau khi timeline dừng
 
-    [Header("UI")]
-    [SerializeField] Image bg;
-    [SerializeField] Image fade;
-    [SerializeField] Button skipIntroButton;     // << NÚT SKIP INTRO
-
-    [Header("Slides")]
-    [SerializeField] List<Slide> slides = new List<Slide>();
-    [SerializeField] int revealAfterIndex = 2;
-
-    [Header("Timing")]
-    [SerializeField] float fadeDuration = 0.6f;
-    [SerializeField] float slideFade = 0.35f;
-    [SerializeField] float zoomDuration = 1.1f;
-    [SerializeField] float blinkIn = 0.25f;
-    [SerializeField] float blinkHold = 0.15f;
-    [SerializeField] float blinkOut = 0.35f;
-    [SerializeField] float zoomExtra = 1.05f;
-
-    [Header("Managers")]
-    [SerializeField] GameManager gameManager;
-
-    RectTransform canvasRT;
-    bool skipped = false;
+    void Reset() { director = GetComponentInChildren<PlayableDirector>(true); }
 
     void Awake()
     {
-        canvasRT = GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
+        if (startMenuRoot) startMenuRoot.SetActive(false); // ẩn UI Start lúc đầu
+        if (hudRoot) hudRoot.SetActive(false);       // ẩn HUD nếu có
+    }
 
-        if (!inGameRoot || !introRoot || !bg || !fade || !zoomRoot || !screenWindow || !canvasRT || !gameManager)
+    void OnEnable()
+    {
+        if (!director) director = GetComponentInChildren<PlayableDirector>(true);
+        if (director)
         {
-            Debug.LogError("[Intro] Missing refs!");
-            enabled = false; return;
+            director.stopped += OnDirectorStopped;
+            if (director.state != PlayState.Playing) director.Play(); // phát intro
         }
-
-        inGameRoot.SetActive(false);
-        introRoot.SetActive(true);
-
-        SetAlpha(fade, 1f);
-        fade.raycastTarget = true;
-
-        zoomRoot.pivot = screenWindow.pivot = new Vector2(0.5f, 0.5f);
-        zoomRoot.localScale = Vector3.one;
-        zoomRoot.anchoredPosition = Vector2.zero;
-
-        // Gán sự kiện skip
-        if (skipIntroButton)
+        else
         {
-            skipIntroButton.onClick.RemoveAllListeners();
-            skipIntroButton.onClick.AddListener(SkipIntroNow);
+            FinishIntro(); // fallback nếu không tìm thấy director
         }
     }
 
-    void Start() => StartCoroutine(Run());
-
-    IEnumerator Run()
+    void OnDisable()
     {
-        if (slides.Count == 0)
-        {
-            yield return SwitchToGame();
-            yield break;
-        }
-
-        // Slide đầu
-        bg.sprite = slides[0].sprite;
-        yield return Fade(1f, 0f, fadeDuration);
-        yield return new WaitForSeconds(slides[0].hold);
-
-        for (int i = 1; i < slides.Count; i++)
-        {
-            if (skipped) yield break; // nếu đã skip thì dừng coroutine
-            yield return Fade(0f, 1f, slideFade);
-            bg.sprite = slides[i].sprite;
-            yield return Fade(1f, 0f, slideFade);
-            yield return new WaitForSeconds(slides[i].hold);
-
-            if (i == revealAfterIndex)
-            {
-                var c = bg.color; c.a = 0f; bg.color = c;
-                yield return ZoomRectToFillAndFadeIn();
-                break;
-            }
-        }
-
-        if (!skipped)
-            yield return SwitchToGame();
+        if (director) director.stopped -= OnDirectorStopped;
     }
 
-    IEnumerator ZoomRectToFillAndFadeIn()
+    void OnDirectorStopped(PlayableDirector d) { StartCoroutine(AfterIntro()); }
+
+    IEnumerator AfterIntro()
     {
-        float sW = canvasRT.rect.width / screenWindow.rect.width;
-        float sH = canvasRT.rect.height / screenWindow.rect.height;
-        float targetScale = Mathf.Max(sW, sH) * Mathf.Max(1f, zoomExtra);
-
-        Vector2 childPos = screenWindow.anchoredPosition;
-        Vector3 startScale = zoomRoot.localScale;
-        Vector2 startPos = zoomRoot.anchoredPosition;
-
-        Vector3 endScale = new Vector3(targetScale, targetScale, 1f);
-        Vector2 endPos = -childPos * targetScale;
-
-        float t = 0f;
-        while (t < zoomDuration)
-        {
-            if (skipped) yield break;
-            float k = Mathf.SmoothStep(0f, 1f, t / zoomDuration);
-            zoomRoot.localScale = Vector3.Lerp(startScale, endScale, k);
-            zoomRoot.anchoredPosition = Vector2.Lerp(startPos, endPos, k);
-
-            var c = bg.color; c.a = Mathf.Lerp(0f, 1f, k); bg.color = c;
-            t += Time.deltaTime; yield return null;
-        }
-        zoomRoot.localScale = endScale;
-        zoomRoot.anchoredPosition = endPos;
+        yield return new WaitForSeconds(postDelay);
+        FinishIntro();
     }
 
-    // Chuyển hẳn sang game
-    IEnumerator SwitchToGame()
+    void FinishIntro()
     {
-        yield return Fade(0f, 1f, blinkIn);
-        yield return new WaitForSecondsRealtime(blinkHold);
+        if (showStartMenu && startMenuRoot) startMenuRoot.SetActive(true);
+        if (!showStartMenu && hudRoot) hudRoot.SetActive(true);
 
-        introRoot.SetActive(false);
-        inGameRoot.SetActive(true);
+        if (autoStartGame) gameManager?.StartGameFromIntro();
 
-        gameManager.StartGameFromIntro();
-
-        yield return new WaitForEndOfFrame();
-        yield return Fade(1f, 0f, blinkOut);
-
-        if (fade) { fade.raycastTarget = false; fade.enabled = false; }
-    }
-
-    // Hàm skip gọi khi bấm nút
-    void SkipIntroNow()
-    {
-        if (skipped) return;
-        skipped = true;
-        StopAllCoroutines();
-        StartCoroutine(SwitchToGame());
-    }
-
-    IEnumerator Fade(float from, float to, float dur)
-    {
-        float t = 0f;
-        while (t < dur)
-        {
-            SetAlpha(fade, Mathf.Lerp(from, to, t / dur));
-            t += Time.deltaTime; yield return null;
-        }
-        SetAlpha(fade, to);
-    }
-
-    void SetAlpha(Image img, float a)
-    {
-        var c = img.color; c.a = a; img.color = c;
+        Destroy(gameObject); // huỷ khối TimeLine (Intro) cho sạch
     }
 }

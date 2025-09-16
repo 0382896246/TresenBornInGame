@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private bool endSequenceRunning = false;
 
     [SerializeField] private float preMenuDelay = 3f;   // chờ realtime trước khi mở menu GameOver
-    [SerializeField] private bool startOnAwake = false; // false = chờ Intro gọi StartGameFromIntro
+    private bool startOnAwake = true; // false = chờ Intro gọi StartGameFromIntro
 
     void Awake()
     {
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.WireButtons(this);           // nếu bạn có hàm gán sự kiện
-            uiManager.ShowSkip(false);
+           uiManager.ShowSkip(false);
             uiManager.SetButtonsInteractable(false);
             uiManager.HideReason();
             uiManager.UpdateHearts(0, maxWrong);
