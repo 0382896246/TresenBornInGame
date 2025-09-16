@@ -20,24 +20,27 @@ public class GameManager : MonoBehaviour
     private int wrongCount = 0;
 
     // Trạng thái
-    private bool isPlaying = false;
-    private bool chosen = false;
+    private bool isPlaying = false;          // đang ở vòng chơi (còn câu hỏi)
+    private bool chosen = false;             // đã chọn đáp án cho câu hiện tại
     private QuestionAsset currentQuestion;
-    private bool endSequenceRunning = false;
+    private bool endSequenceRunning = false; // đang mở GameOver (tránh gọi trùng)
 
-    [SerializeField] private float preMenuDelay = 3f;   // chờ realtime trước khi mở menu GameOver
-    private bool startOnAwake = true; // false = chờ Intro gọi StartGameFromIntro
+    // Cờ “đợi mở Game Over khi bấm Skip”
+    private bool pendingGameOver = false;    // true khi đã thua nhưng chưa bấm Skip để mở bảng
+
+    [SerializeField] private float preMenuDelay = 0.5f;   // chờ realtime trước khi mở menu GameOver
+    [SerializeField] private bool startOnAwake = true;    // false = chờ Intro gọi StartGameFromIntro
 
     void Awake()
     {
         // Luôn khôi phục thời gian để không bị treo từ scene trước
         Time.timeScale = 1f;
 
-        // Đảm bảo luôn có EventSystem
+        // Đảm bảo có EventSystem
         if (EventSystem.current == null)
         {
             var es = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
-            DontDestroyOnLoad(es); // an toàn nếu bạn đổi scene
+            DontDestroyOnLoad(es);
         }
     }
 
@@ -46,25 +49,23 @@ public class GameManager : MonoBehaviour
         // Chuẩn bị UI
         if (uiManager != null)
         {
-            uiManager.WireButtons(this);           // nếu bạn có hàm gán sự kiện
-           uiManager.ShowSkip(false);
+            uiManager.WireButtons(this);
+            uiManager.ShowSkip(false);
             uiManager.SetButtonsInteractable(false);
             uiManager.HideReason();
             uiManager.UpdateHearts(0, maxWrong);
         }
 
+        // Nhạc nền tuỳ ý
+        audioManager?.PlayBGM();
+
         if (startOnAwake)
         {
             StartGame();
         }
-        else
-        {
-            // Cho nhạc nền chạy nếu muốn ngay khi vào scene
-            audioManager?.PlayBGM();
-        }
     }
 
-    // Được Intro gọi khi kết thúc Intro (hoặc gọi thẳng nếu startOnAwake = true)
+    // Được Intro gọi khi kết thúc Intro
     public void StartGameFromIntro() => StartGame();
 
     public void StartGame()
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
         chosen = false;
         wrongCount = 0;
         score = 0;
+        pendingGameOver = false;
 
         uiManager?.UpdateHearts(wrongCount, maxWrong);
         uiManager?.ShowSkip(false);
@@ -96,13 +98,14 @@ public class GameManager : MonoBehaviour
 
         if (!questionManager.HasNext())
         {
-            // Hết câu => thắng
+            // Hết câu => thắng (mở GameOver luôn như cũ)
             StartCoroutine(EndGameSequence(true));
             return;
         }
 
         chosen = false;
         uiManager.ShowSkip(false);
+        pendingGameOver = false;
 
         currentQuestion = questionManager.NextQuestion();
         uiManager.HideReason();
@@ -119,27 +122,44 @@ public class GameManager : MonoBehaviour
         chosen = true;
 
         uiManager.SetButtonsInteractable(false);
-        uiManager.ShowReason(currentQuestion);
+        uiManager.ShowReason(currentQuestion); // Hiện phần giải thích/đáp án
         ApplyScore(match);
 
         if (!match)
         {
             wrongCount++;
             uiManager.UpdateHearts(wrongCount, maxWrong);
+
+            // >>> CHỚP ẢNH "MẤT MÁU" KHI TRẢ LỜI SAI
+            uiManager?.FlashDamage();
         }
 
         // Sau khi trả lời mới hiện nút Skip
         uiManager.ShowSkip(true);
 
+        // Nếu vượt ngưỡng sai: KHÔNG mở gameover ngay, chờ bấm Skip
         if (wrongCount >= maxWrong)
         {
-            StartCoroutine(EndGameSequence(false)); // thua
+            pendingGameOver = true;
         }
     }
 
     public void SkipButton()
     {
-        if (!isPlaying || !chosen || endSequenceRunning) return;
+        if (endSequenceRunning) return;
+
+        // Chỉ cho Skip sau khi đã chọn xong đáp án câu hiện tại
+        if (!isPlaying || !chosen) return;
+
+        // Nếu đã thua và chờ Skip để mở GameOver
+        if (pendingGameOver)
+        {
+            StartCoroutine(EndGameSequence(false)); // thua
+            pendingGameOver = false;
+            return;
+        }
+
+        // Chưa thua -> sang câu tiếp theo
         LoadNext();
     }
 
@@ -152,19 +172,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // score -= pointsOnMismatch; // mở nếu muốn trừ điểm
+            // score -= pointsOnMismatch; // bật nếu muốn trừ điểm khi sai
             audioManager?.PlayWrong();
         }
     }
 
-    // Đóng băng game rồi mở GameOver sau một khoảng realtime (để người chơi kịp đọc)
+    // Đóng băng game rồi mở GameOver/Win sau một nhịp realtime
     private IEnumerator EndGameSequence(bool isWin)
     {
         if (endSequenceRunning) yield break;
         endSequenceRunning = true;
 
         isPlaying = false;
-        chosen = true;
 
         uiManager?.SetButtonsInteractable(false);
         uiManager?.ShowSkip(false);
@@ -174,20 +193,21 @@ public class GameManager : MonoBehaviour
 
         audioManager?.StopBGM();
 
-        // Dừng game (timeScale=0) nhưng chờ bằng thời gian thực
+        // Pause gameplay nhưng vẫn cho UI chạy mượt
         Time.timeScale = 0f;
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSecondsRealtime(preMenuDelay);
+        if (preMenuDelay > 0f)
+            yield return new WaitForSecondsRealtime(preMenuDelay);
 
         int total = questionManager ? questionManager.TotalRounds : 0;
-        int correct = Mathf.Clamp(score, 0, total); // pointsOnMatch = 1 => số câu đúng
+        int correct = Mathf.Clamp(score, 0, total); // nếu mỗi câu đúng +1
 
         gameOverUI?.ShowGameOver(isWin, correct, total);
     }
 
     void OnDestroy()
     {
-        // Nếu scene bị unload khi đang pause, mở lại để không "mang theo" timeScale=0
+        // Nếu scene bị unload khi đang pause, mở lại để không mang theo Time.timeScale=0
         if (Time.timeScale == 0f) Time.timeScale = 1f;
     }
 }
